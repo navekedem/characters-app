@@ -1,0 +1,18 @@
+.search-form{
+    &-item{
+        margin-bottom: 1rem;
+        &.three-inline{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        &-inline{
+            flex: 0 0 42%;
+            &.btn{
+                flex: 0 0 10%;
+                button{font-size: 1rem;
+                    font-weight: 700;}
+            }
+        }
+    }
+}
