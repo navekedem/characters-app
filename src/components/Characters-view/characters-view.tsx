@@ -1,22 +1,26 @@
 import { Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import Paper from '@mui/material/Paper';
-import axios from "axios";
-import React, { useEffect, useRef, useState } from 'react';
 import { Character } from '../../models/character';
+import { CharacterDialog } from '../../models/character-dialog';
 import { Info } from '../../models/info';
 import { SearchParams } from '../../models/search-params';
-import './characters-table.scss';
+import { CustomCharatersDialog } from '../custom-dialog/custom-dialog';
+import React, { useEffect, useState } from 'react';
+import Paper from '@mui/material/Paper';
+import axios from "axios";
+import './characters-view.scss';
 
 interface TableProps {
+    tableView:boolean;
     params: SearchParams
 }
 
 
-export const CharactersTable = (props: TableProps) => {
+export const CharactersView = (props: TableProps) => {
     const [isLoading, setLoading] = useState<boolean>(false);
     const [charactres, setCharacters] = useState<Character[]>([]);
     const [paginationInfo, setInfo] = useState<Info>();
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [characterDialog, setCharacterDialog] = useState<CharacterDialog>();
 
     useEffect(() => {   
         if(props.params) {
@@ -52,12 +56,16 @@ export const CharactersTable = (props: TableProps) => {
     const openDialog = (characterId: number) => {
         let selectedCharacter = charactres.find((character) => character.id === characterId);
         if(selectedCharacter) {
-            console.log(selectedCharacter);
+            let episodeLength = selectedCharacter.episode.length;
+            let dialogCharacter: CharacterDialog = {characterId:selectedCharacter.id,characterName:selectedCharacter.name,image: selectedCharacter.image,firstEpisode:selectedCharacter.episode[0],lastEpisode:selectedCharacter.episode[episodeLength - 1]};
+            setCharacterDialog(dialogCharacter);
         }
     }   
 
-    return <div className="charaters-table"> {isLoading ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div> : <><TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    return <div className="charaters-main"> {isLoading ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div> : 
+    <>{props.tableView ? <div className="charaters-table">
+         <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="charaters table">
             <TableHead>
                 <TableRow>
                     <TableCell></TableCell>
@@ -70,7 +78,7 @@ export const CharactersTable = (props: TableProps) => {
             </TableHead>   
             <TableBody>
                 {charactres.map((character) => (
-                    <TableRow key={character.id} onClick={() => openDialog(character.id)} hover={true} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                    <TableRow key={character.id} onClick={() => openDialog(character.id)} className="charaters-table-item" hover={true} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell ><img src={character.image} className="charaters-table-image" alt={character.name} /></TableCell>
                         <TableCell >{character.name} </TableCell>
                         <TableCell >{character.origin.name}</TableCell>
@@ -82,7 +90,21 @@ export const CharactersTable = (props: TableProps) => {
             </TableBody>
         </Table>
     </TableContainer>
-    <div className="charaters-table-pagination">
+    </div> :
+   <div className="charaters-cards">
+       {charactres.map((character) => (
+                    <TableRow key={character.id} onClick={() => openDialog(character.id)} hover={true} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                        <TableCell ><img src={character.image} className="charaters-table-image" alt={character.name} /></TableCell>
+                        <TableCell >{character.name} </TableCell>
+                        <TableCell >{character.origin.name}</TableCell>
+                        <TableCell >{character.status}</TableCell>
+                        <TableCell >{character.species}</TableCell>
+                        <TableCell >{character.gender}</TableCell>
+                    </TableRow>
+                ))}
+   </div> }
+    {characterDialog ? <div className="charaters-main-dialog"><CustomCharatersDialog key={characterDialog.characterId} characterDetailsDialog={characterDialog}></CustomCharatersDialog></div> : ""}
+    <div className="charaters-main-pagination">
         <Pagination count={paginationInfo?.pages} page={currentPage ? currentPage : 1} onChange={handlePageChange} shape="rounded" />
     </div></>}</div>
 

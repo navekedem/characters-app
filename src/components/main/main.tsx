@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import { SearchParams } from '../../models/search-params';
-import { CharactersTable } from '../Characters-table/characters-table';
+import { CharactersView } from '../Characters-view/characters-view';
 import { SearchForm } from '../Search-form/search-form';
 import shortid from 'shortid';
 import './main.scss';
@@ -21,8 +21,8 @@ export const Main = () => {
         <section className="form-wrapper">
             <SearchForm updateValues={handleParams}></SearchForm>
         </section>
-        <section className="table-wrapper">
-            <CharactersTable key={key} params={searchParams}></CharactersTable>
+        <section className="characters-wrapper">
+            <CharactersView key={key} tableView={true} params={searchParams}></CharactersView>
         </section>
     </main>
 }
