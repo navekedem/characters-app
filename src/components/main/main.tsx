@@ -22,7 +22,7 @@ export const Main = () => {
             <SearchForm updateValues={handleParams}></SearchForm>
         </section>
         <section className="characters-wrapper">
-            <CharactersView key={key} tableView={true} params={searchParams}></CharactersView>
+            <CharactersView key={key} params={searchParams}></CharactersView>
         </section>
     </main>
 }

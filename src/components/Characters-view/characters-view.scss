@@ -3,7 +3,37 @@
         margin-top:1rem;
     }
 }
-
+.charaters-cards{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    &-item{
+        margin-bottom: 1rem;
+        flex: 0 0 23%;
+        transition: all 0.3s ease-in-out !important;
+        &:hover{
+            cursor: pointer;
+            transform:scale(1.03);
+        }
+    }
+    &-title{
+        display: flex;
+        align-items: center;
+        img{
+            margin-right: 1rem;
+        }
+    }
+    &-content{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        &-item{
+            margin-bottom: 0.5rem;
+            flex: 0 0 45%;
+            span{display: block;}
+        }
+    }
+}
 .charaters-table{
     &-image{
         height:3.5rem;
