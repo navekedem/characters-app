@@ -1,4 +1,4 @@
-import { Card, CardContent, Collapse, Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Card, CardContent, Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { Character } from '../../models/character';
 import { CharacterDialog } from '../../models/character-dialog';
 import { Info } from '../../models/info';
