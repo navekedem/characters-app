@@ -59,7 +59,7 @@ export const SearchForm = (props: ValuesHandler) => {
         handleChangeStatus("");
     }
 
-    return <form className="search-form">
+    return <form className="search-form" onSubmit={(event) => event.preventDefault()}>
         <div className="search-form-item">
             <FormControl fullWidth>
                 <InputLabel htmlFor="outlined-adornment-search">Search</InputLabel>
