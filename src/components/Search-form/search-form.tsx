@@ -28,7 +28,7 @@ export const SearchForm = (props: ValuesHandler) => {
     useEffect(() => {
         const identifier = setTimeout(() => {
             props.updateValues("name",searchValue); 
-        },500)
+        },400)
 
         //clean up function
         return () => {
@@ -115,7 +115,7 @@ export const SearchForm = (props: ValuesHandler) => {
                 </FormControl>
             </div>
             <div className="search-form-item-inline btn">
-                <Button onClick={clearAllValues} variant="contained">Clear All</Button>
+                <Button type="button" onClick={clearAllValues} variant="contained">Clear All</Button>
             </div>
         </div>
     </form>

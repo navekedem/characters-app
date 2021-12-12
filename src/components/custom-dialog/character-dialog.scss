@@ -9,4 +9,13 @@
         margin-bottom: 0.3rem;
         border-bottom: 1px solid gray;
     }
+    @media (max-width: 768px){
+        .css-m9glnp-MuiPaper-root-MuiDialog-paper{
+            width: 70%;
+            height:70%;
+        }
+        &-image{
+            height:15rem;
+        }
+    }
 }
