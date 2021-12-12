@@ -1,0 +1,14 @@
+.episodes{
+    &-title{
+        text-align: center;
+    }
+    &-chart{
+        width: 60%;
+        margin: auto;
+    }
+    @media (max-width: 768px){
+        &-chart{
+            width: 100%;
+        }
+    }
+}

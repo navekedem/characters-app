@@ -17,14 +17,14 @@ export const Main = () => {
         setSearchParmas(paramsItem);
     }
 
-    return <main>
+    return <>
         <section className="form-wrapper">
             <SearchForm updateValues={handleParams}></SearchForm>
         </section>
         <section className="characters-wrapper">
             <CharactersView key={key} params={searchParams}></CharactersView>
         </section>
-    </main>
+    </>
 }
 
 

@@ -3,13 +3,17 @@
     text-align: left;
     background-color: #1976d2;
     box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
-    display:flex;
-    align-items:center;
-    justify-content: space-between;
+    &-content{
+        display:flex;
+        align-items:center;
+        justify-content: space-between;
+    }
     h1{
         font-size: 2rem;
+        display: inline-block;
         color: #fff;font-weight: bold;
         margin:0;
+        vertical-align: top;
     }
     &-btns{
         .active{
@@ -18,9 +22,21 @@
             }
         }
     }
+    
     @media (max-width:768px){
-        flex-wrap: wrap;
-        h1,&-btns{flex: 0 0 100%;text-align: center;}
-        
+        &-content{flex-wrap: wrap;}
+        &-btns{text-align: right;}
+        &-title,&-btns{flex: 0 0 100%;}
+        &-title{display: flex;align-items:center;}
+        h1{font-size:1.3rem;}
+    }
+}
+.menu {
+    &-link{
+        text-decoration: none;
+        font-weight: bold;
+        padding:0.5rem 1rem;
+        color: #000;
+        font-size: 1.5rem;
     }
 }
