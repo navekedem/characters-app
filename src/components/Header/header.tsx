@@ -20,7 +20,7 @@ export const Header = () => {
         setTableView(false)
         dispatch(changeView(false)); 
     }
-    return <header className="app-header">
+    return <header data-aos="flip-down" className="app-header">
         <h1>Rick And Morty Characters App</h1>
         <div className="app-header-btns">     
             <ButtonGroup variant="outlined" aria-label="outlined button group">

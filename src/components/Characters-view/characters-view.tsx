@@ -76,8 +76,8 @@ export const CharactersView = (props: TableProps) => {
     }
     return <>{error ? <div className="error"> No Match Results <br/> Try to search something else </div> : <div className="charaters-main"> {isLoading ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div> :
         <>{tableView ? <div className="charaters-table">
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="charaters table">
+            <TableContainer data-aos="fade-up" component={Paper}>
+                <Table sx={{ minWidth: 650 }}  aria-label="charaters table">
                     <TableHead>
                         <TableRow>
                             <TableCell></TableCell>
@@ -90,7 +90,7 @@ export const CharactersView = (props: TableProps) => {
                     </TableHead>
                     <TableBody>
                         {charactres.map((character) => (
-                            <TableRow key={character.id} onClick={() => openDialog(character.id)} className="charaters-table-item" hover={true} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                            <TableRow key={character.id}  onClick={() => openDialog(character.id)} className="charaters-table-item" hover={true} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell ><img src={character.image} className="charaters-table-image" alt={character.name} /></TableCell>
                                 <TableCell >{character.name} </TableCell>
                                 <TableCell >{character.origin.name}</TableCell>
@@ -105,7 +105,7 @@ export const CharactersView = (props: TableProps) => {
         </div> :
             <div className="charaters-cards">
                 {charactres.map((character) => (
-                    <Card key={character.id} className="charaters-cards-item" onClick={() => openDialog(character.id)} sx={{ minWidth: 275 }}>
+                    <Card key={character.id} className="charaters-cards-item" data-aos="fade-right" onClick={() => openDialog(character.id)} sx={{ minWidth: 275 }}>
                         <CardContent>
                             <div className="charaters-cards-title">
                                 <img src={character.image} className="charaters-table-image" alt={character.name} />
