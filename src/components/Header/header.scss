@@ -18,4 +18,9 @@
             }
         }
     }
+    @media (max-width:768px){
+        flex-wrap: wrap;
+        h1,&-btns{flex: 0 0 100%;text-align: center;}
+        
+    }
 }

@@ -33,6 +33,16 @@
             span{display: block;}
         }
     }
+    @media (max-width:1280px){
+        &-item{
+            flex: 0 0 45%;
+        }
+    }
+    @media (max-width:768px){
+        &-item{
+            flex: 0 0 100%;
+        }
+    }
 }
 .charaters-table{
     &-image{
@@ -45,6 +55,13 @@
             cursor: pointer;
         }
     }
+}
+
+.error{
+    color: red;
+    font-size: 1.5rem;
+    text-align:center;
+    margin: 2rem 0;
 }
 
 //Loader

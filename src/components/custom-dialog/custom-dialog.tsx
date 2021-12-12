@@ -12,7 +12,7 @@ interface DialogProps {
 }
 
 export const CustomCharatersDialog = (props: DialogProps) => {
-    const [open, setOpen] = useState<boolean>(true);
+    const [open, setOpen] = useState<boolean>(false);
     const [firstEpisode, setFirstEpisode] = useState<string>('');
     const [lastEpisode, setLastEpisode] = useState<string>('');
     const theme = useTheme();
@@ -20,6 +20,7 @@ export const CustomCharatersDialog = (props: DialogProps) => {
 
 
     useEffect(() => {
+        setOpen(true);
         getCharactersEpisodeData(props.characterDetailsDialog.firstEpisode, props.characterDetailsDialog.lastEpisode);
     }, [props.characterDetailsDialog]);
 
@@ -42,7 +43,7 @@ export const CustomCharatersDialog = (props: DialogProps) => {
                     setFirstEpisode(episodesData[0].episode);
                     setLastEpisode(episodesData[1].episode);
                 } else {
-                    
+
                 }
             }
         }).catch(function (error) {

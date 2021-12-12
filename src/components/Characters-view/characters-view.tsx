@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import axios from "axios";
 import './characters-view.scss';
+import { useSelector } from 'react-redux';
 
 
 
@@ -16,20 +17,27 @@ interface TableProps {
 }
 
 export const CharactersView = (props: TableProps) => {
+    //Component state and properties
     const [isLoading, setLoading] = useState<boolean>(false);
     const [charactres, setCharacters] = useState<Character[]>([]);
     const [paginationInfo, setInfo] = useState<Info>();
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [characterDialog, setCharacterDialog] = useState<CharacterDialog>();
-    const [tableView, setTableView] = useState<boolean>(false);
+    const [isOpen, setOpenDialog] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
+    const tableView:boolean = useSelector((state) => state) as boolean;
 
+     //Component dependencies handlers
     useEffect(() => {
         if (props.params) {
+            setError(false);
             setLoading(true);
             getCharactersData(currentPage);
         }
     }, [props.params])
 
+
+    //Component Function Handlers
     const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
         //check if user not click on the same page
         if (page !== currentPage) {
@@ -46,10 +54,13 @@ export const CharactersView = (props: TableProps) => {
                 setCharacters(response.data.results);
                 setInfo(response.data.info);
                 setLoading(false);
+                setOpenDialog(false);
                 setCurrentPage(page);
+                
             }
         }).catch(function (error) {
             // handle error
+            setError(true);
             setLoading(false);
         })
     }
@@ -59,21 +70,22 @@ export const CharactersView = (props: TableProps) => {
         if (selectedCharacter) {
             let episodeLength = selectedCharacter.episode.length;
             let dialogCharacter: CharacterDialog = { characterId: selectedCharacter.id, characterName: selectedCharacter.name, image: selectedCharacter.image, firstEpisode: selectedCharacter.episode[0], lastEpisode: selectedCharacter.episode[episodeLength - 1] };
+            setOpenDialog(true);
             setCharacterDialog(dialogCharacter);
         }
     }
-    return <div className="charaters-main"> {isLoading ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div> :
+    return <>{error ? <div className="error"> No Match Results <br/> Try to search something else </div> : <div className="charaters-main"> {isLoading ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div> :
         <>{tableView ? <div className="charaters-table">
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="charaters table">
                     <TableHead>
                         <TableRow>
                             <TableCell></TableCell>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Origin</TableCell>
-                            <TableCell>Status</TableCell>
-                            <TableCell>Species</TableCell>
-                            <TableCell>Gender</TableCell>
+                            <TableCell><span className='bold'>Name</span> </TableCell>
+                            <TableCell><span className='bold'>Origin</span></TableCell>
+                            <TableCell><span className='bold'>Status</span></TableCell>
+                            <TableCell><span className='bold'>Species</span></TableCell>
+                            <TableCell><span className='bold'>Gender</span></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -116,9 +128,9 @@ export const CharactersView = (props: TableProps) => {
                         </CardContent>
                     </Card>))}
             </div>}
-            {characterDialog ? <div className="charaters-main-dialog"><CustomCharatersDialog key={characterDialog.characterId} characterDetailsDialog={characterDialog}></CustomCharatersDialog></div> : ""}
+            {isOpen && characterDialog ? <div className="charaters-main-dialog"><CustomCharatersDialog key={characterDialog.characterId} characterDetailsDialog={characterDialog}></CustomCharatersDialog></div> : ""}
             <div className="charaters-main-pagination">
                 <Pagination count={paginationInfo?.pages} page={currentPage ? currentPage : 1} onChange={handlePageChange} shape="rounded" />
-            </div></>}</div>
+            </div></>}</div>}</>
 
 }

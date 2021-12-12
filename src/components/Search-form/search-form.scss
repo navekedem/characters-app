@@ -15,4 +15,24 @@
             }
         }
     }
+    @media (max-width:1280px){
+        &-item{
+            &.three-inline{
+                flex-wrap: wrap;
+            }
+            &-inline{
+                flex: 0 0 45%;
+                margin-bottom:1rem;
+                &.btn{flex: 0 0 100%;text-align: right;}
+            }
+        }
+    }
+    @media (max-width:390px){
+        &-item{
+            &-inline{
+                flex: 0 0 100%;
+                
+            }
+        }
+    }
 }

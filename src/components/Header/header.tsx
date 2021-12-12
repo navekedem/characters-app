@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
-import './header.scss';
 import TableViewIcon from '@mui/icons-material/TableView';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Button, ButtonGroup } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { changeView } from '../../actions'
+import './header.scss';
 
 export const Header = () => {
+      //Component state and properties
     const [tableView,setTableView] = useState<boolean>(true);
+    const dispatch = useDispatch();
 
-    const handleTableViewChange = (event:any) => {
+    //Component function Handlers
+    const handleTableViewChange = () => {
         setTableView(true)
+        dispatch(changeView(true)); 
     }
-    const handleCardViewChange = (event:any) => {
+    const handleCardViewChange = () => {
         setTableView(false)
+        dispatch(changeView(false)); 
     }
     return <header className="app-header">
         <h1>Rick And Morty Characters App</h1>

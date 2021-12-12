@@ -24,17 +24,40 @@ export const SearchForm = (props: ValuesHandler) => {
     },[genderType])
 
 
+    //Debounce to search name field
+    useEffect(() => {
+        const identifier = setTimeout(() => {
+            props.updateValues("name",searchValue); 
+        },500)
+
+        //clean up function
+        return () => {
+            clearTimeout(identifier)
+        }
+    },[searchValue])
+
+
     //Component Handlers
     const handleSearchChange = (event: any) => {
-        setSearchValue(event.target.value);
+        if(event.target) {
+            setSearchValue(event.target.value);
+        }
     }
     const handleChangeGender = (event: any) => {
-        setGender(event.target.value);
+        if(event.target) {
+            setGender(event.target.value);
+        }
     }
     const handleChangeStatus = (event: any) => {
-        setStatus(event.target.value);
+        if(event.target) {
+            setStatus(event.target.value);
+        }
     }
-
+    const clearAllValues = () => {
+        setSearchValue("");
+        setGender("");
+        handleChangeStatus("");
+    }
 
     return <form className="search-form">
         <div className="search-form-item">
@@ -92,7 +115,7 @@ export const SearchForm = (props: ValuesHandler) => {
                 </FormControl>
             </div>
             <div className="search-form-item-inline btn">
-                <Button variant="contained">Clear All</Button>
+                <Button onClick={clearAllValues} variant="contained">Clear All</Button>
             </div>
         </div>
     </form>
