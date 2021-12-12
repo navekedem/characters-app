@@ -39,17 +39,12 @@ export const options = {
 
 
 export const Episodes = () => {
+    //Component state and properties
+    const [isLoading, setLoading] = useState<boolean>(false);
     const [episodes,setEpisodes] = useState<Episode[]>([]);
     const [labels,setLabels] = useState<string[]>([]);
     const [dataSetArray,setData] = useState<number[]>([]);
-
-    useEffect(() => {
-        getEpisodesData();
-    },[])
-    useEffect(() => {
-        handleEpisodes();
-    },[episodes])
-
+    const [error, setError] = useState<boolean>(false);
     const data = {
         labels,
         datasets: [
@@ -62,19 +57,30 @@ export const Episodes = () => {
         ],
     };
 
+    //Component dependencies handlers
+    useEffect(() => {
+        getEpisodesData();
+    },[])
+    useEffect(() => {
+        handleEpisodes();
+    },[episodes])
 
+
+    //Component Function Handlers
     const getEpisodesData = () => {
+        setLoading(true);
         axios.get('https://rickandmortyapi.com/api/episode').then(function (response) {
             // handle success
             if (response) {
                 if(response.data.results.length > 0) {
-                    setEpisodes(response.data.results);        
+                    setEpisodes(response.data.results); 
+                    setLoading(false);       
                 }
             }
         }).catch(function (error) {
             // handle error
-            // setError(true);
-            // setLoading(false);
+            setError(true);
+            setLoading(false);
         })
     }
     const handleEpisodes = () => {
@@ -90,12 +96,12 @@ export const Episodes = () => {
         }
     }
 
-    return <section className="episodes">
+    return <>{isLoading ?  <div className="lds-ring"><div></div><div></div><div></div><div></div></div> : <section className="episodes">
         <div className="episodes-title">
             <h2>Episodes Chart</h2>
         </div>
-        <div className="episodes-chart">
+        {error ? <div className="error"> No Match Results <br/> Try to search something else </div> : <div className="episodes-chart">
             <Bar options={options} className='episodes-chart-bar' data={data} />
-        </div>
-    </section>
+        </div>}
+    </section>}</>
 }

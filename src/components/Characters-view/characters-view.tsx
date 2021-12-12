@@ -60,8 +60,8 @@ export const CharactersView = (props: TableProps) => {
             }
         }).catch(function (error) {
             // handle error
-            setError(true);
             setLoading(false);
+            setError(true);
         })
     }
 
