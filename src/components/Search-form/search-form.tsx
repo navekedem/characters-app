@@ -56,7 +56,7 @@ export const SearchForm = (props: ValuesHandler) => {
     const clearAllValues = () => {
         setSearchValue("");
         setGender("");
-        handleChangeStatus("");
+        setStatus("");
     }
 
     return <form className="search-form" onSubmit={(event) => event.preventDefault()}>
@@ -115,7 +115,7 @@ export const SearchForm = (props: ValuesHandler) => {
                 </FormControl>
             </div>
             <div className="search-form-item-inline btn">
-                <Button type="button" onClick={clearAllValues} variant="contained">Clear All</Button>
+                <Button onClick={clearAllValues} variant="contained">Clear All</Button>
             </div>
         </div>
     </form>
