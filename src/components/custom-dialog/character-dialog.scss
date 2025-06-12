@@ -9,6 +9,9 @@
         margin-bottom: 0.3rem;
         border-bottom: 1px solid gray;
     }
+    &-description{
+        margin: 0.5rem 0;
+    }
     @media (max-width: 768px){
         .css-m9glnp-MuiPaper-root-MuiDialog-paper{
             width: 70%;
