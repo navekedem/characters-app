@@ -47,4 +47,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## OpenRouter Integration
 
-Set the `REACT_APP_OPENROUTER_API_KEY` environment variable in a `.env.local` file before running the app. This key is used to retrieve AI-generated character descriptions when opening the character modal.
+Set the `REACT_APP_OPENROUTER_API_KEY` environment variable in a `.env.local` file before running the app. You can copy `.env.local.example` to `.env.local` and fill in your API key. This key is used to retrieve AI-generated character descriptions when opening the character modal.
